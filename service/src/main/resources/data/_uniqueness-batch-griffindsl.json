@@ -1,0 +1,72 @@
+{
+  "name": "unique_batch",
+
+  "process.type": "batch",
+
+  "data.sources": [
+    {
+      "name": "source",
+      "baseline": true,
+      "connectors": [
+        {
+          "type" : "HIVE",
+          "version" : "1.2",
+          "predicates" : [ ],
+          "data.unit" : "1day",
+          "data.time.zone" : "",
+          "config" : {
+            "database" : "default",
+            "table.name" : "mysource"
+          }
+        }
+      ]
+    },
+    {
+      "name": "target",
+      "connectors": [
+        {
+          "type" : "HIVE",
+          "version" : "1.2",
+          "predicates" : [ ],
+          "data.unit" : "1day",
+          "data.time.zone" : "",
+          "config" : {
+            "database" : "default",
+            "table.name" : "mytarget"
+          }
+        }
+      ]
+    }
+  ],
+
+  "evaluate.rule": {
+    "rules": [
+      {
+        "dsl.type": "griffin-dsl",
+        "dq.type": "uniqueness",
+        "out.dataframe.name": "dup",
+        "rule": "name",
+        "details": {
+          "source": "source",
+          "target": "target",
+          "total": "total",
+          "unique": "unique",
+          "dup": "dup",
+          "num": "num"
+        },
+        "out":[
+          {
+            "type": "metric",
+            "name": "unique"
+          },
+          {
+            "type": "record",
+            "name": "myRecords"
+          }
+        ]
+      }
+    ]
+  },
+
+  "sinks": ["HDFS","ELASTICSEARCH"]
+}

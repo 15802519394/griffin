@@ -1,0 +1,58 @@
+{
+  "measure.type" : "griffin",
+  "id" : 255,
+  "name" : "emp2employee_job002",
+  "owner" : "test",
+  "description" : "empAndemployee_Measure_002",
+  "deleted" : false,
+  "timestamp" : 1547978983269,
+  "dq.type" : "ACCURACY",
+  "sinks" : [ "ELASTICSEARCH", "HDFS" ],
+  "process.type" : "BATCH",
+  "data.sources" : [ {
+    "id" : 258,
+    "name" : "source",
+    "connectors" : [ {
+      "id" : 259,
+      "name" : "source1547610231068",
+      "type" : "HIVE",
+      "version" : "1.2",
+      "predicates" : [ ],
+      "data.unit" : "1day",
+      "data.time.zone" : "",
+      "config" : {
+        "database" : "default",
+        "table.name" : "employee"
+      }
+    } ],
+    "baseline" : false
+  }, {
+    "id" : 260,
+    "name" : "target",
+    "connectors" : [ {
+      "id" : 261,
+      "name" : "target1547610239463",
+      "type" : "HIVE",
+      "version" : "1.2",
+      "predicates" : [ ],
+      "data.unit" : "1day",
+      "data.time.zone" : "",
+      "config" : {
+        "database" : "default",
+        "table.name" : "emp"
+      }
+    } ],
+    "baseline" : false
+  } ],
+  "evaluate.rule" : {
+    "id" : 256,
+    "rules" : [ {
+      "id" : 257,
+      "rule" : "source.eid!=target.id",
+      "dsl.type" : "griffin-dsl",
+      "dq.type" : "ACCURACY",
+      "out.dataframe.name" : "accuracy"
+    } ]
+  },
+  "measure.type" : "griffin"
+}

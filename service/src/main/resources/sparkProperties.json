@@ -1,0 +1,15 @@
+{
+  "file": "hdfs://bigdata121:9000/griffin/griffin-measure.jar",
+  "className": "org.apache.griffin.measure.Application",
+  "name": "griffin",
+  "queue": "default",
+  "numExecutors": 2,
+  "driverMemory": "2g",
+  "executorCores": 1,
+  "executorMemory": "2g",
+  "conf": {
+    "spark.yarn.dist.files": "hdfs://bigdata121:9000/config/hive-site.xml"
+  },
+  "files": [
+  ]
+}

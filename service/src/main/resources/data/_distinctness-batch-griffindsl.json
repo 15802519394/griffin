@@ -1,0 +1,105 @@
+{
+  "name": "dist_batch",
+
+  "process.type": "batch",
+
+  "data.sources": [
+    {
+      "name": "source",
+      "baseline": true,
+      "connectors": [
+        {
+          "type" : "HIVE",
+          "version" : "1.2",
+          "predicates" : [ ],
+          "data.unit" : "1day",
+          "data.time.zone" : "",
+          "config" : {
+            "database" : "default",
+            "table.name" : "mysource"
+          }
+        }
+      ]
+    },
+    {
+      "name": "target",
+      "baseline": true,
+      "connectors": [
+        {
+          "type" : "HIVE",
+          "version" : "1.2",
+          "predicates" : [ ],
+          "data.unit" : "1day",
+          "data.time.zone" : "",
+          "config" : {
+            "database" : "default",
+            "table.name" : "mytarget"
+          }
+        }
+      ]
+    }
+  ],
+
+  "evaluate.rule": {
+    "rules": [
+      {
+        "dsl.type": "griffin-dsl",
+        "dq.type": "distinct",
+        "out.dataframe.name": "dist",
+        "rule": "name,age",
+        "details": {
+          "source": "source",
+          "target": "target",
+          "total": "total",
+          "distinct": "distinct",
+          "dup": "dup",
+          "num": "num",
+          "duplication.array": "dup"
+        },
+        "out":[
+          {
+            "type": "metric",
+            "name": "distinct"
+          },
+          {
+            "type": "record",
+            "name": "myRecords"
+          }
+        ]
+      }
+    ]
+  },
+
+  "sinks": ["HDFS","ELASTICSEARCH"]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12期：
+一次性：10892.96
+分期：10957.08
+
+6期：
+一次性：10503.02
+分期：10525.26
+
+3期：
+一次性：10289.99
+分期：10297.11
+

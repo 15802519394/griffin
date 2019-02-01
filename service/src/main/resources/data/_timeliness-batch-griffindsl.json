@@ -1,0 +1,59 @@
+{
+  "name": "timeliness_batch",
+
+  "process.type": "batch",
+
+  "data.sources": [
+    {
+      "name": "source",
+      "connectors": [
+        {
+          "type" : "HIVE",
+          "version" : "1.2",
+          "predicates" : [ ],
+          "data.unit" : "1day",
+          "data.time.zone" : "",
+          "config" : {
+            "database" : "default",
+            "table.name" : "mytimew"
+          }
+        }
+      ]
+    }
+  ],
+
+  "evaluate.rule": {
+    "rules": [
+      {
+        "dsl.type": "griffin-dsl",
+        "dq.type": "timeliness",
+        "out.dataframe.name": "timeliness",
+        "rule": "ts, end_ts",
+        "details": {
+          "source": "source",
+          "latency": "latency",
+          "total": "total",
+          "avg": "avg",
+          "threshold": "3m",
+          "step": "step",
+          "count": "cnt",
+          "step.size": "1m",
+          "percentile": "percentile",
+          "percentile.values": [0.95]
+        },
+        "out":[
+          {
+            "type": "metric",
+            "name": "timeliness"
+          },
+          {
+            "type": "record",
+            "name": "myRecords"
+          }
+        ]
+      }
+    ]
+  },
+
+  "sinks": ["HDFS","ELASTICSEARCH"]
+}

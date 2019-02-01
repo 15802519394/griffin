@@ -1,0 +1,37 @@
+{
+  "measure_no_predicate_day": [
+    {
+      "name": "job_no_predicate_day",
+      "type": "accuracy",
+      "owner": "test",
+      "metricValues": [
+        {
+          "name": "job_no_predicate_day",
+          "tmst": 1517994480000,
+          "value": {
+            "total": 125000,
+            "miss": 0,
+            "matched": 125000
+          }
+        },
+        {
+          "name": "job_no_predicate_day",
+          "tmst": 1517994240000,
+          "value": {
+            "total": 125000,
+            "miss": 0,
+            "matched": 125000
+          }
+        }
+      ]
+    }
+  ],
+  "measre_predicate_hour": [
+    {
+      "name": "job_predicate_hour",
+      "type": "accuracy",
+      "owner": "test",
+      "metricValues": []
+    }
+  ]
+}
